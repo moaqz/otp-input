@@ -1,0 +1,30 @@
+{
+  "name": "@moaqz/otp-input",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:ui": "pnpm unbuild && playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.14.1",
+    "eslint": "^9.17.0",
+    "eslint-config-moaqz": "^0.3.0",
+    "lefthook": "^1.9.0",
+    "typescript": "~5.7.3",
+    "unbuild": "^3.5.0"
+  }
+}
