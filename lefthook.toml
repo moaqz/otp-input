@@ -8,4 +8,4 @@ glob = "*.{js,ts,tsx,jsx,json}"
 stage_fixed = true
 
 [pre-commit.commands.test]
-run = "pnpm playwright test"
+run = "pnpm test:ci"

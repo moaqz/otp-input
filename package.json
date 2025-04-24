@@ -16,7 +16,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:ui": "pnpm unbuild && playwright test --ui"
+    "test:ui": "pnpm unbuild && playwright test --ui",
+    "test:ci": "pnpm unbuild && pnpm playwright test --reporter=dot"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",

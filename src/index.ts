@@ -96,14 +96,25 @@ class OTPInput extends HTMLElement {
   }
 
   private handleInsertTextInput(event: InputEvent) {
-    const char = event.data;
-    if (!char) {
+    const { data: char, target } = event;
+    if (
+      !char ||
+      !this.isDigit(char) ||
+      !(target instanceof HTMLInputElement)
+    ) {
       event.preventDefault();
       return;
     }
 
-    if (!this.isDigit(char)) {
+    // If the input is already filled, overwrite it only if the new character is different.
+    if (target.value.length !== 0 && target.value !== char) {
       event.preventDefault();
+      target.value = char;
+
+      const nextField = target.nextElementSibling;
+      if (nextField && nextField instanceof HTMLInputElement) {
+        nextField.focus();
+      }
     }
   }
 

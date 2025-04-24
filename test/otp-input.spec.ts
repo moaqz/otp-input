@@ -80,4 +80,17 @@ test.describe("Input validation", () => {
 
     await expect(inputs.last()).toBeFocused();
   });
+
+  test("should overwrite the current value when typing a different character", async ({ page }) => {
+    const inputs = page.locator("otp-input > input");
+
+    await inputs.first().fill("1");
+    await expect(inputs.first()).toHaveValue("1");
+
+    await inputs.first().focus();
+    await inputs.first().fill("2");
+
+    await expect(inputs.first()).toHaveValue("2");
+    await expect(inputs.nth(1)).toBeFocused();
+  });
 });
