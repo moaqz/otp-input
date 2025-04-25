@@ -1,13 +1,30 @@
 {
-  "name": "@moaqz/otp-input",
-  "version": "0.0.0",
+  "name": "@moaqzdev/otp-input",
+  "version": "0.1.0-alpha",
+  "description": "One-time password input component",
   "type": "module",
+  "author": {
+    "name": "moaqz"
+  },
+  "homepage": "https://github.com/moaqz/otp-input#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moaqz/otp-input.git"
+  },
+  "bugs": {
+    "url": "https://github.com/moaqz/otp-input/issues"
+  },
+  "keywords": [
+    "otp",
+    "input"
+  ],
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
-    }
+    },
+    "./themes/default": "./dist/themes/default.css"
   },
   "types": "./dist/index.d.mts",
   "files": [
@@ -16,8 +33,10 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test:ui": "pnpm unbuild && playwright test --ui",
-    "test:ci": "pnpm unbuild && pnpm playwright test --reporter=dot"
+    "build": "pnpm unbuild --minify",
+    "test:ui": "pnpm build && playwright test --ui",
+    "test:ci": "pnpm build && playwright test --reporter=dot",
+    "prepublish": "pnpm test:ci"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
