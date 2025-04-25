@@ -1,0 +1,42 @@
+otp-input {
+    --otp-input-field-size: 2.5rem;
+    --otp-input-field-radius: 0.3rem;
+    --otp-input-font-size: 1.25rem;
+
+    --otp-input-border-color: #D8D9E0;
+    --otp-input-accent-color: #3D63DD;
+    --otp-input-caret-color: #3F5CB0;
+
+    display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    otp-input {
+        --otp-input-border-color: #393A40;
+        --otp-input-accent-color: #3D63DD;
+        --otp-input-caret-color: #3657C3;
+    }
+}
+
+otp-input input {
+    font: inherit;
+    color: inherit;
+    font-size: var(--otp-input-font-size);
+    text-align: center;
+    flex-shrink: 1;
+	min-width: calc(var(--otp-input-field-size) / 2); 
+    max-width: var(--otp-input-field-size);
+	height: var(--otp-input-field-size);
+    border-radius: var(--otp-input-field-radius);
+    border: 1px solid var(--otp-input-border-color);
+    background-color: transparent;
+    caret-color: var(--otp-input-caret-color);
+
+    &:focus {
+        outline-width: 2px;
+        outline-color: var(--otp-input-accent-color);
+        outline-style: solid;
+    }
+}
