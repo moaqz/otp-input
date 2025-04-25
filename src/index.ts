@@ -1,5 +1,12 @@
 class OTPInput extends HTMLElement {
+  static formAssociated = true;
   private _controller = new AbortController();
+  private _internals: ElementInternals;
+
+  constructor() {
+    super();
+    this._internals = this.attachInternals();
+  }
 
   public connectedCallback() {
     this.addEventListener("input", this.handleChange, { signal: this._controller.signal });
@@ -58,6 +65,8 @@ class OTPInput extends HTMLElement {
     ) {
       nextInput.focus();
     }
+
+    this._internals.setFormValue(this.value);
   }
 
   private handlePaste(event: InputEvent) {
@@ -88,6 +97,7 @@ class OTPInput extends HTMLElement {
       currentEl = currentEl.nextElementSibling as HTMLInputElement | null;
     }
 
+    this._internals.setFormValue(this.value);
     lastFilled?.focus();
   }
 
@@ -109,7 +119,9 @@ class OTPInput extends HTMLElement {
     // If the input is already filled, overwrite it only if the new character is different.
     if (target.value.length !== 0 && target.value !== char) {
       event.preventDefault();
+
       target.value = char;
+      this._internals.setFormValue(this.value);
 
       const nextField = target.nextElementSibling;
       if (nextField && nextField instanceof HTMLInputElement) {
@@ -134,6 +146,17 @@ class OTPInput extends HTMLElement {
     }
 
     prevInput.focus();
+  }
+
+  get value(): string {
+    const fields = this.querySelectorAll<HTMLInputElement>("input");
+
+    let _value = "";
+    for (const field of fields) {
+      _value += field.value;
+    }
+
+    return _value;
   }
 }
 
