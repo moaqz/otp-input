@@ -5,9 +5,8 @@
 
 <https://github.com/user-attachments/assets/ba709131-6da1-4840-95a1-6c787deae9a4>
 
-![License](https://badgen.net/npm/license/@moaqzdev/otp-input)
+![License](https://badgen.net/github/license/moaqz/otp-input)
 ![npm version](https://badgen.net/npm/v/@moaqzdev/otp-input)
-![Gzip + Minify size](https://badgen.net/bundlephobia/minzip/@moaqzdev/otp-input)
 
 ## How it works
 
