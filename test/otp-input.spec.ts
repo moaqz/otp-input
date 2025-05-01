@@ -26,7 +26,7 @@ test.describe("Focus behavior", () => {
 
     const inputs = page.locator("otp-input > input");
 
-    expect(inputs.first()).toBeFocused();
+    await expect(inputs.first()).toBeFocused();
   });
 
   test("should move the focus to next input after inserting a valid digit", async ({ page }) => {
@@ -35,7 +35,7 @@ test.describe("Focus behavior", () => {
     await inputs.first().fill("1");
     await expect(inputs.first()).toHaveValue("1");
 
-    expect(inputs.nth(1)).toBeFocused();
+    await expect(inputs.nth(1)).toBeFocused();
   });
 
   test("should not move focus to the next input when deleting a character", async ({ page }) => {
@@ -58,10 +58,10 @@ test.describe("Input validation", () => {
     const inputs = page.locator("otp-input > input");
 
     await inputs.first().type("a");
-    expect(inputs.first()).toHaveValue("");
+    await expect(inputs.first()).toHaveValue("");
 
     await inputs.first().type("#");
-    expect(inputs.first()).toHaveValue("");
+    await expect(inputs.first()).toHaveValue("");
   });
 
   test.skip("should populate all inputs when pasting a complete OTP code", async ({ page, context }) => {
