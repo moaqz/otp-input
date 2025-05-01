@@ -7,6 +7,7 @@
 
 ![License](https://badgen.net/github/license/moaqz/otp-input)
 ![npm version](https://badgen.net/npm/v/@moaqzdev/otp-input)
+![bundle size](https://img.shields.io/bundlejs/size/@moaqzdev/otp-input)
 
 ## How it works
 
