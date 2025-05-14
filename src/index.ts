@@ -135,12 +135,16 @@ class OTPInput extends HTMLElement {
       return;
     }
 
-    // If the input is already filled, overwrite it only if the new character is different.
-    if (target.value.length !== 0 && target.value !== char) {
+    // If the input is already filled.
+    if (target.value.length !== 0) {
+      const didValueChange = target.value !== char;
+
       event.preventDefault();
 
-      target.value = char;
-      this._internals.setFormValue(this.value);
+      if (didValueChange) {
+        target.value = char;
+        this._internals.setFormValue(this.value);
+      }
 
       const nextField = target.nextElementSibling;
       if (nextField && nextField instanceof HTMLInputElement) {
