@@ -12,10 +12,29 @@ class OTPInput extends HTMLElement {
     this.addEventListener("input", this.handleChange, { signal: this._controller.signal });
     this.addEventListener("beforeinput", this.handleInputChange, { signal: this._controller.signal });
     this.addEventListener("click", this.handleClick, { signal: this._controller.signal });
+    this.addEventListener("keydown", this.handleKeydown, { signal: this._controller.signal });
   }
 
   public disconnectedCallback() {
     this._controller.abort();
+  }
+
+  private handleKeydown(event: KeyboardEvent) {
+    const { target, key } = event;
+    if (!target || !(target instanceof HTMLInputElement)) {
+      return;
+    };
+
+    const previousElement = target.previousElementSibling;
+    const nextElement = target.nextElementSibling;
+
+    if (key === "ArrowLeft" && previousElement instanceof HTMLInputElement) {
+      previousElement.focus();
+      event.preventDefault();
+    } else if (key === "ArrowRight" && nextElement instanceof HTMLInputElement) {
+      nextElement.focus();
+      event.preventDefault();
+    }
   }
 
   private handleClick(event: MouseEvent) {

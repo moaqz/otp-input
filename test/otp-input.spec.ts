@@ -51,6 +51,25 @@ test.describe("Focus behavior", () => {
     await expect(inputs.nth(1)).not.toBeFocused();
     await expect(inputs.first()).toBeFocused();
   });
+
+  test("should allow movement with the arrow keys", async ({ page }) => {
+    const inputs = page.locator("otp-input > input");
+    await inputs.first().focus();
+
+    await test.step("Move focus to the 4th input using ArrowRight", async () => {
+      for (let i = 0; i < 3; i++) {
+        await page.keyboard.press("ArrowRight");
+      }
+      await expect(inputs.nth(3)).toBeFocused();
+    });
+
+    await test.step("Move focus back to the 1st input using ArrowLeft", async () => {
+      for (let i = 0; i < 3; i++) {
+        await page.keyboard.press("ArrowLeft");
+      }
+      await expect(inputs.first()).toBeFocused();
+    });
+  });
 });
 
 test.describe("Input validation", () => {
