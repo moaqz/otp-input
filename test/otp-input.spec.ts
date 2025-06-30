@@ -121,3 +121,20 @@ test.describe("Input validation", () => {
     await expect(inputs.nth(1)).toBeFocused();
   });
 });
+
+test.describe("Input attributes", () => {
+  test("should disable all inputs when disabled attribute is present", async ({ page }) => {
+    const otpInput = page.locator("otp-input");
+
+    await otpInput.evaluate((element) => {
+      element.setAttribute("disabled", "");
+    });
+
+    await expect(otpInput).toHaveAttribute("disabled");
+
+    const inputs = await page.locator("> input").all();
+    for (const input of inputs) {
+      await expect(input).toHaveAttribute("disabled");
+    }
+  });
+});

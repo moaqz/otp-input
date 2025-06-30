@@ -9,8 +9,22 @@ class OTPInput extends HTMLElement {
     this._internals = this.attachInternals();
   }
 
+  static get observedAttributes() {
+    return ["disabled"];
+  }
+
+  public attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
+    if (name === "disabled") {
+      this._fields.forEach((field) => { field.disabled = newValue !== null; });
+    }
+  }
+
   public connectedCallback() {
     this._fields = Array.from(this.querySelectorAll<HTMLInputElement>("input"));
+
+    if (this.hasAttribute("disabled")) {
+      this._fields.forEach(field => { field.disabled = true; });
+    }
 
     this.addEventListener("input", this.handleChange, { signal: this._controller.signal });
     this.addEventListener("beforeinput", this.handleInputChange, { signal: this._controller.signal });
